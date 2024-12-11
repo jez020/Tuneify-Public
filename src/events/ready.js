@@ -7,7 +7,7 @@ export const Event = {
     name: "ready",
     runOnce: true,
     run: async (client) => {
-        client.user?.setActivity("Humans.", {
+        client.user?.setActivity("Humans trying to find their best playlist", {
             type: ActivityType.Watching
         });
 

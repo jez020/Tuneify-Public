@@ -1,5 +1,5 @@
 {
-  "name": "discordbot-template",
+  "name": "tuneify",
   "version": "9.0.7",
   "description": "Just your average discord bot handler.",
   "main": "bot.js",
