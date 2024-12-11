@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits, Partials } from "discord.js";
+import { Client, Collection, GatewayIntentBits, Partials } from "discord.js";
 import { BOT_TOKEN } from "./src/config.js";
 import { dirname } from "node:path";
 import { ButtonManager } from "./src/structures/managers/buttonCommands.js";
@@ -9,8 +9,10 @@ import { SelectMenuManager } from "./src/structures/managers/selectMenus.js";
 import { SlashManager } from "./src/structures/managers/slashCommands.js";
 import JSONdb from "simple-json-db";
 
+
 const __dirname = dirname(import.meta.url);
 export const rootPath = __dirname;
+
 
 (async () => {
     const client = new Client({
@@ -31,6 +33,10 @@ export const rootPath = __dirname;
     });
 
     client.cooldownDB = new JSONdb("./cooldownDB.json");
+
+    client.spotifyDB = new JSONdb("./spotifyDB.json");
+
+    client.cooldowns = new Collection();
 
     client.messageCommands = new Map();
     client.messageCommands_Aliases = new Map();

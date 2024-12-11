@@ -6,7 +6,7 @@ let userObj = [];
 
 setInterval(() => {
     userObj = [];
-}, 1 * 20 * 1000)
+}, 1 * 60 * 60 * 1000)
 
 export const Modal = {
     name: "feedbackModal",

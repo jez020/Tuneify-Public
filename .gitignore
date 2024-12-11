@@ -1,3 +1,5 @@
 node_modules/
 cooldownDB.sqlite
+cooldownDB.json
+spotifyDB.json
 ./src/config.js

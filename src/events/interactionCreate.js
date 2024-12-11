@@ -1,7 +1,16 @@
+import { Client, CommandInteraction } from "discord.js";
 import commandOptionsChecker from "../structures/commandOptions/processor.js";
 export const Event = {
     name: "interactionCreate",
+    /**
+     * 
+     * @param {CommandInteraction} interaction 
+     * @param {Client} client 
+     * @returns 
+     */
     run: async (interaction, client) => {
+        
+
         if (interaction.isChatInputCommand()) {
             const slashCommand = client.slashCommands.get(interaction.commandName);
             if (!slashCommand) return;
