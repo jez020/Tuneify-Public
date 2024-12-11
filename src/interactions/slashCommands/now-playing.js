@@ -1,24 +1,33 @@
 import fetch from "node-fetch";
-import { spotifyAuthToken } from "../../utils/spotify.js";
+import { spotifyAuthToken, spotifyCheckToken, spotifyPlayback } from "../../utils/spotify.js";
 import { EmbedBuilder } from "discord.js";
 
 export const Slash = {
     name: "now-playing",
-    guildCooldown: 20 * 1000,
+    guildCooldown: 0 * 1000,
     description: "Get the now playing song on spotify!",
     run: async (interaction, client) => {
-      let SpotifyAuth = (await spotifyAuthToken())
-
-      let np = await (await fetch('https://api.spotify.com/v1/me/player', {
-        headers: {
-            'Authorization': 'Bearer ' + SpotifyAuth["access_token"]
-        }
-      })).json();
-
-      console.log(np)
-
-      let npEmbed = new EmbedBuilder()
+      let token = await spotifyAuthToken(interaction.user, interaction)
+      let np = (await spotifyPlayback(token))
+      if(np.status == 204)return interaction.reply("This user is not currently listening to anything!")
+      np = await np.json()
+      let embed = new EmbedBuilder()
+        .setTitle("Now Playing | " + np.item.name)
+        .setURL(np.item.external_urls.spotify)
+        .setThumbnail(np.item.album.images[0].url)
+        .setFields([
+          {
+            name: "track",
+            value: np.item.name,
+            inline: true
+          },{
+            name: "artist",
+            value: np.item.artists[0].name,
+            inline: true
+          }
+        ])
         .setColor("Green")
-        .setTitle("Now Playing | " + "")
+
+      interaction.reply({ embeds: [embed] })
     }
 }; // Simple /Ping command
