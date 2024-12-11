@@ -3,7 +3,7 @@ import { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } from
 
 export const Slash = {
     name: "feedback",
-    globalCooldown: 1 * 60 * 60 * 1000,
+    globalCooldown: 1 * 1 * 10 * 1000,
     description: "Send the bot owners feedback!",
     run: async (interaction) => {
         const modal = new ModalBuilder()
