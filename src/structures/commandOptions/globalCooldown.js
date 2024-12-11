@@ -1,5 +1,14 @@
-import { EmbedBuilder } from "discord.js";
+import { ChatInputCommandInteraction, Client, EmbedBuilder } from "discord.js";
 
+
+/**
+ * 
+ * @param {Client} client 
+ * @param {ChatInputCommandInteraction} message 
+ * @param {SlashCommand} command 
+ * @param {*} interactionType 
+ * @returns 
+ */
 export const globalCooldownFN = async (client, message, command, interactionType) => {
     if (!command.globalCooldown || isNaN(command.globalCooldown)) return true;
 
@@ -13,7 +22,7 @@ export const globalCooldownFN = async (client, message, command, interactionType
     }
     else {
         if (command.returnErrors === false || command.returnGlobalCooldownError === false) return false;
-        message.channel.send({
+        message.reply({
             embeds: [
                 new EmbedBuilder()
                 .setColor("DarkRed")
@@ -25,6 +34,7 @@ export const globalCooldownFN = async (client, message, command, interactionType
                 .setThumbnail(client.user.displayAvatarURL())
                 .setDescription(`You are currently at cooldown. Please try again in <t:${Math.floor(Math.floor(storedTime + command.globalCooldown) / 1000)}:R>.`)
             ],
+            ephemeral: true
         });
 
         return false;

@@ -6,7 +6,7 @@ export const onlyChannelsFN = (client, message, command) => {
     if (command.onlyChannels.some((channelId) => message.channel?.id == channelId)) return true;
     else {
         if (command.returnErrors === false || command.returnOnlyChannelsError === false) return false;
-        message.channel.send({
+        command.reply({
             embeds: [new EmbedBuilder()
                     .setColor("DarkRed")
                     .setTimestamp()
