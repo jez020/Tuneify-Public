@@ -15,7 +15,7 @@ export const Event = {
             const slashCommand = client.slashCommands.get(interaction.commandName);
             if (!slashCommand) return;
 
-            if (!await commandOptionsChecker(client, interaction, slashCommand, "SlashCommand")) return;
+            if (!(await commandOptionsChecker(client, interaction, slashCommand, "SlashCommand"))) return;
             else slashCommand.run(interaction, client);
         }
 

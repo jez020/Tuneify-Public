@@ -1,13 +1,5 @@
 import { EmbedBuilder, ModalSubmitInteraction, WebhookClient } from "discord.js";
 
-
-
-let userObj = [];
-
-setInterval(() => {
-    userObj = [];
-}, 1 * 60 * 60 * 1000)
-
 export const Modal = {
     name: "feedbackModal",
     /**
@@ -15,7 +7,6 @@ export const Modal = {
      * @param {ModalSubmitInteraction} interaction 
      */
     run: (interaction) => {
-        if(userObj.includes(interaction.user.id))return interaction.reply({ content: "Please try again later, you already responded recently!", ephemeral: true })
         let reply = interaction.fields.getTextInputValue('feedbackInput');
         let serverEmbed = new EmbedBuilder()
             .setColor("Green")
@@ -37,6 +28,5 @@ export const Modal = {
             embeds: [userEmbed],
             ephemeral: true
         });
-        userObj.push(interaction.user.id)
     }
 }; // Code for the ExampleModal ModalForm
