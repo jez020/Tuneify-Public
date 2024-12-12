@@ -8,6 +8,7 @@ export const Slash = {
     description: "Get the now playing song on spotify!",
     run: async (interaction, client) => {
       let token = await spotifyAuthToken(interaction.user, interaction)
+      if(token == false)return;
       let np = (await spotifyPlayback(token))
       if(np.status == 204)return interaction.reply("This user is not currently listening to anything!")
       np = await np.json()

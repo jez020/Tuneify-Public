@@ -23,6 +23,7 @@ export const spotifyAuthToken = async (user, interaction) => {
     let result = await spotifyCheckToken(user, interaction)
     if(result == false){
         interaction.reply("Please use /link-spotify to link your Spotify account!")
+        return false
     }else{
         return result
     }
