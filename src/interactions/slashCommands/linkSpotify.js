@@ -5,6 +5,7 @@ import { SPOTIFY_ID, SPOTIFY_REDIRECT_URI, SPOTIFY_SCOPES } from "../../config.j
 import JSONdb from "simple-json-db";
 import path from "path"
 import { fileURLToPath } from "url";
+import querystring from "querystring"
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -48,7 +49,10 @@ export const Slash = {
 
         let randomId = makeid(16)
         spotifyTempDB.set(randomId, interaction.user.id)
-        let uri = 'https://accounts.spotify.com/authorize?' +
+        
+        const button = new ButtonBuilder()
+            .setLabel("Complete Account Linking Now.")
+            .setURL('https://accounts.spotify.com/authorize?' +
             querystring.stringify({
                 show_dialog: true,
                 response_type: 'code',
@@ -56,13 +60,7 @@ export const Slash = {
                 scope: SPOTIFY_SCOPES,
                 redirect_uri: SPOTIFY_REDIRECT_URI,
                 state: randomId
-        })
-
-        console.log(uri)
-        
-        const button = new ButtonBuilder()
-            .setLabel("Complete Account Linking Now.")
-            .setURL("https://google.com")
+        }))
 			.setStyle(ButtonStyle.Link);
 
         const embed = new EmbedBuilder()
