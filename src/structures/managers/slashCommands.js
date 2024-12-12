@@ -3,7 +3,6 @@ import { fileReader } from "../../utils/fileReader.js";
 import { PRODUCTION } from "../../config.js";
 
 export const SlashManager = async(client, rootPath) => {
-    if(!PRODUCTION)return;
     const allSlashCommandsFiles = fileReader(`${rootPath}/src/interactions/slashCommands`);
     const allContextMenusFiles = fileReader(`${rootPath}/src/interactions/contextMenus`);
     const rest = new REST({ version: '10' }).setToken(client.token);

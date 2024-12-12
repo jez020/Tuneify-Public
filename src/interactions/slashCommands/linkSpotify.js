@@ -24,7 +24,7 @@ function makeid(length) {
 export const Slash = {
     name: "link-spotify",
     // globalCooldown: 1 * 60 * 60 * 1000,
-    description: "Get the now playing song on spotify!",
+    description: "Manage your spotify account.",
     /**
      * 
      * @param {ChatInputCommandInteraction} interaction 

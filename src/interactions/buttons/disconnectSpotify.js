@@ -20,6 +20,11 @@ export const Button = {
             .setTitle("Your Spotify Account has been removed from our database!")
             .setDescription("Although we now have no access to your Spotify's API tokens, we suggest you to manually remove \"Tune Bot\" inside your spotify connections page to complete the disconnections.")
             .setColor("Green")
-        await interaction.channel.send({ embeds: [embed], components: [], ephemeral: false })
+        if(interaction.message.editable){
+            await interaction.message.edit({ embeds: [embed], components: [], ephemeral: false })
+        }{
+            await interaction.message.reply({ embeds: [embed], components: [], ephemeral: false })
+            if(interaction.message.deletable)await interaction.message.delete()
+        }
     }
 }; // ButtonCommand of the deleteOutput button.
