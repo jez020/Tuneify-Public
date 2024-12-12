@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import { spotifyAuthToken } from "../../utils/spotify.js";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, Client, Embed, EmbedBuilder, TextInputStyle } from "discord.js";
-import { SPOTIFY_ID, SPOTIFY_REDIRECT_URI } from "../../config.js";
+import { SPOTIFY_ID, SPOTIFY_REDIRECT_URI, SPOTIFY_SCOPES } from "../../config.js";
 import JSONdb from "simple-json-db";
 import path from "path"
 import { fileURLToPath } from "url";
@@ -51,7 +51,15 @@ export const Slash = {
         
         const button = new ButtonBuilder()
             .setLabel("Complete Account Linking Now.")
-            .setURL(SPOTIFY_REDIRECT_URI + "?show_dialog=true&state=" + randomId)
+            .setURL('https://accounts.spotify.com/authorize?' +
+            querystring.stringify({
+                show_dialog: true,
+                response_type: 'code',
+                client_id: SPOTIFY_ID,
+                scope: SPOTIFY_SCOPES,
+                redirect_uri: SPOTIFY_REDIRECT_URI,
+                state: randomId
+        }))
 			.setStyle(ButtonStyle.Link);
 
         const embed = new EmbedBuilder()
