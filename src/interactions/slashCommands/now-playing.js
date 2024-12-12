@@ -18,25 +18,23 @@ export const Slash = {
         .setThumbnail(np.item.album.images[0].url)
         .setFields([
           {
-            name: "Track",
-            value: np.item.name,
-            inline: true
-          },{
             name: "Artist",
             value: np.item.artists[0].name,
             inline: true
-          },{
+          },
+          {
+            name: "\u200B",
+            value: "\u200B",
+            inline: true
+          },
+          {
             name: "Album",
             value: np.item.album.name,
-            inline: true
-          },{
-            name: "Playing Mode",
-            value: `${np["shuffle_state"] ? (np["smart_shuffle"] ? "Smart Shuffle" : "Shuffling") : "Not Shuffling"} | Repeating ${np["repeat_state"] == "off" ? "Off" : (np["repeat_state"] == "context" ? "On" : "Current Track")}`,
             inline: true
           }
         ])
         .setColor("Green")
-        .setFooter({ text: `Current Playback Status: ${np["is_playing"] ? "Currently Playing" : "Paused/Recently Played"}` })
+        .setFooter({ text: `${np["shuffle_state"] ? (np["smart_shuffle"] ? "Smart Shuffle" : "Shuffling") : "Not Shuffling"} | Repeating ${np["repeat_state"] == "off" ? "Off" : (np["repeat_state"] == "context" ? "On" : "Current Track")} | ${np["is_playing"] ? "Currently Playing" : "Paused/Recently Played"}` })
 
       interaction.reply({ embeds: [embed] })
     }
