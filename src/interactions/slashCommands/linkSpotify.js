@@ -23,7 +23,7 @@ function makeid(length) {
 
 export const Slash = {
     name: "link-spotify",
-    // globalCooldown: 1 * 60 * 60 * 1000,
+    globalCooldown: 1 * 60 * 60 * 1000,
     description: "Manage your spotify account.",
     /**
      * 
@@ -66,7 +66,7 @@ export const Slash = {
         const embed = new EmbedBuilder()
             .setColor("Green")
             .setTitle("Linking your Spotify Account!")
-            .setDescription(`Please click the button below to link your spotify account!`)
+            .setDescription(`Please click the button below to link your spotify account! Note that some features requires you to have Spotify Premium.`)
 
         
 		const buttons = new ActionRowBuilder()

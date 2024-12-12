@@ -1,7 +1,9 @@
 import { EmbedBuilder } from "discord.js";
+import { OWNER_IDS } from "../../config.js";
 
 export const channelCooldownFN = async (client, message, command, interactionType) => {
     if (!command.channelCooldown || isNaN(command.channelCooldown) || !message.guild) return true;
+    if (OWNER_IDS.includes(message.member.id))return true;
 
     const dbData = `channelCoolown.${message.channel.id}.${interactionType}.${command.name}.${message.member.id}`;
     const currentTime = Date.now();

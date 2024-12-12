@@ -1,4 +1,5 @@
 import { ChatInputCommandInteraction, Client, EmbedBuilder } from "discord.js";
+import { OWNER_IDS } from "../../config.js";
 
 
 /**
@@ -11,6 +12,7 @@ import { ChatInputCommandInteraction, Client, EmbedBuilder } from "discord.js";
  */
 export const globalCooldownFN = async (client, message, command, interactionType) => {
     if (!command.globalCooldown || isNaN(command.globalCooldown)) return true;
+    if (OWNER_IDS.includes(message.member.id))return true;
 
     const dbData = `globalCooldown.${interactionType}.${command.name}.${message.member.id}`;
     const currentTime = Date.now();
