@@ -48,10 +48,7 @@ export const Slash = {
 
         let randomId = makeid(16)
         spotifyTempDB.set(randomId, interaction.user.id)
-        
-        const button = new ButtonBuilder()
-            .setLabel("Complete Account Linking Now.")
-            .setURL('https://accounts.spotify.com/authorize?' +
+        let uri = 'https://accounts.spotify.com/authorize?' +
             querystring.stringify({
                 show_dialog: true,
                 response_type: 'code',
@@ -59,7 +56,13 @@ export const Slash = {
                 scope: SPOTIFY_SCOPES,
                 redirect_uri: SPOTIFY_REDIRECT_URI,
                 state: randomId
-        }))
+        })
+
+        console.log(uri)
+        
+        const button = new ButtonBuilder()
+            .setLabel("Complete Account Linking Now.")
+            .setURL("https://google.com")
 			.setStyle(ButtonStyle.Link);
 
         const embed = new EmbedBuilder()
