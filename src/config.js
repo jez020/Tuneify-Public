@@ -1,7 +1,7 @@
 export const PREFIX = ["t."];
 export const BOT_TOKEN = process.env.TUNEIFY_TOKEN;
 export const OWNER_IDS = ["539195184357965833"];
-export const PRODUCTION = false;
+export const PRODUCTION = true;
 export const SPOTIFY_ID = process.env.TUNEIFY_SPOTIFY_ID
 export const SPOTIFY_SECRET = process.env.TUNEIFY_SPOTIFY_SECRET
 export const SPOTIFY_REDIRECT_URI = PRODUCTION ? "http://164.92.98.110:3000/spotify/callback" : "http://localhost:3000/spotify/callback"

@@ -12,7 +12,6 @@ export const Slash = {
       let np = (await spotifyPlayback(token))
       if(np.status == 204)return interaction.reply("This user is not currently listening to anything!")
       np = await np.json()
-    console.log(np)
       let embed = new EmbedBuilder()
         .setTitle("Now Playing | " + np.item.name)
         .setURL(np.item.external_urls.spotify)
