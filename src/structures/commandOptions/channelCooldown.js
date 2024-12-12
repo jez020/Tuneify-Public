@@ -21,8 +21,7 @@ export const channelCooldownFN = async (client, message, command, interactionTyp
                 .setColor("DarkRed")
                 .setTimestamp()
                 .setAuthor({
-                    name: message.member.user.globalName ?? message.member.user.username,
-                    iconURL: message.member.user.displayAvatarURL()
+                    name: message.member.user.globalName ?? message.member.user.username
                 })
                 .setThumbnail(client.user.displayAvatarURL())
                 .setDescription(`You are currently at cooldown. Please try again in <t:${Math.floor(Math.floor(storedTime + command.channelCooldown) / 1000)}:R>.`)
