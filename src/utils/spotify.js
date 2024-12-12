@@ -40,7 +40,7 @@ export const spotifyCheckToken = async (user, interaction) => {
 
     let spotifyUser = spotifyDB.get(user.id)
     if(Date.now() - spotifyUser["expires_at"] >= 0){
-        spotifyDB = await refreshToken(user.id, spotifyUser["refresh_token"])
+        spotifyUser = await refreshToken(user.id, spotifyUser["refresh_token"])
     }
 
     return `${spotifyUser['token_type']} ${spotifyUser['access_token']}`
