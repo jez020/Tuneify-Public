@@ -31,21 +31,6 @@ export const Slash = {
             name: "Album",
             value: `[${np.item.album.name}](${np.item.album.external_urls.spotify})`,
             inline: true
-          },
-          {
-            name: "Context",
-            value: `[${np.context.type}](${np.context.external_urls.spotify})`,
-            inline: true
-          },
-          {
-            name: "\u200B",
-            value: "\u200B",
-            inline: true
-          },
-          {
-            name: "Playback Device Type",
-            value: np.device.type,
-            inline: true
           }
         ])
         .setColor("Green")
