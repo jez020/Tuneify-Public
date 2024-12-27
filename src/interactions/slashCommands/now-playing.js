@@ -12,30 +12,34 @@ export const Slash = {
       let np = (await spotifyPlayback(token))
       if(np.status == 204)return interaction.reply("This user is not currently listening to anything!")
       np = await np.json()
-      let embed = new EmbedBuilder()
-        .setTitle("Now Playing | " + np.item.name)
-        .setURL(np.item.external_urls.spotify)
-        .setThumbnail(np.item.album.images[0].url)
-        .setFields([
-          {
-            name: "Artist",
-            value: `[${np.item.artists[0].name}](${np.item.artists[0].external_urls.spotify})`,
-            inline: true
-          },
-          {
-            name: "\u200B",
-            value: "\u200B",
-            inline: true
-          },
-          {
-            name: "Album",
-            value: `[${np.item.album.name}](${np.item.album.external_urls.spotify})`,
-            inline: true
-          }
-        ])
-        .setColor("Green")
-        .setFooter({ text: `${np["shuffle_state"] ? (np["smart_shuffle"] ? "Smart Shuffle" : "Shuffling") : "Not Shuffling"} | Repeating ${np["repeat_state"] == "off" ? "Off" : (np["repeat_state"] == "context" ? "On" : "Current Track")} | ${np["is_playing"] ? "Currently Playing" : "Paused/Recently Played"}` })
+      if(np["currently_playing_type"] == "episode"){
+        interaction.reply("This user is currently listening to a podcast that we do not have information about!")
+      }else{
+        let embed = new EmbedBuilder()
+          .setTitle("Now Playing | " + np.item.name)
+          .setURL(np.item.external_urls.spotify)
+          .setThumbnail(np.item.album.images[0].url)
+          .setFields([
+            {
+              name: "Artist",
+              value: `[${np.item.artists[0].name}](${np.item.artists[0].external_urls.spotify})`,
+              inline: true
+            },
+            {
+              name: "\u200B",
+              value: "\u200B",
+              inline: true
+            },
+            {
+              name: "Album",
+              value: `[${np.item.album.name}](${np.item.album.external_urls.spotify})`,
+              inline: true
+            }
+          ])
+          .setColor("Green")
+          .setFooter({ text: `${np["shuffle_state"] ? (np["smart_shuffle"] ? "Smart Shuffle" : "Shuffling") : "Not Shuffling"} | Repeating ${np["repeat_state"] == "off" ? "Off" : (np["repeat_state"] == "context" ? "On" : "Current Track")} | ${np["is_playing"] ? "Currently Playing" : "Paused/Recently Played"}` })
 
-      interaction.reply({ embeds: [embed] })
+        interaction.reply({ embeds: [embed] })
+      }
     }
 }; // Simple /Ping command
